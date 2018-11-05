@@ -1,28 +1,106 @@
 apply plugin: 'com.android.application'
+//系统签名 配置
+def keystoreProps = new Properties()
+File keystoreProperties = rootProject.file("keystore.properties")
+if (keystoreProperties.exists()) {
+    keystoreProps.load(new FileInputStream(keystoreProperties))
+} else {
+    keystoreProps['keystorefile'] = 'none'
+}
 
 android {
-    compileSdkVersion 28
+    //通过config.gradle来宏定义版本
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
-        applicationId "mvp.com.mvpdemo"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        applicationId "com.plat.sdk"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
     }
+    /*系统签名的值 包括debug和release两个版本*/
+    signingConfigs {
+        debug {
+            storeFile file(keystoreProps.keyStore)
+            storePassword keystoreProps.keyStorePassword
+            keyAlias keystoreProps.keyAlias
+            keyPassword keystoreProps.keyAliasPassword
+        }
+        relealse {
+            storeFile file(keystoreProps.keyStore)
+            storePassword keystoreProps.keyStorePassword
+            keyAlias keystoreProps.keyAlias
+            keyPassword keystoreProps.keyAliasPassword
+        }
+    }
+
     buildTypes {
+        debug {
+            minifyEnabled false
+            zipAlignEnabled true
+            shrinkResources false
+            proguardFiles GLOBAL_PROGUARD_RULES_FILE
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            zipAlignEnabled true
+            shrinkResources false
+            /*GLOBAL_PROGUARD_RULES_FILE 存放在gradle.properties 用于混淆，防止反编译*/
+            proguardFiles GLOBAL_PROGUARD_RULES_FILE
+            signingConfig signingConfigs.relealse
+        }
+    }
+    // 如果abortOnError为 true，则当lint发现错误时停止 gradle构建
+    lintOptions { abortOnError false }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //理解不是很清晰
+    flavorDimensions "features"
+    productFlavors {
+        // 线程相关Demo
+        ThreadDemo {
+            dimension "features"
+            applicationId "com.plat.threaddemo"
+            manifestPlaceholders = ["Demo_DeviceVersion_Value": "${buildTime()}"]
+            versionCode 1
+            versionName "1.0.1"
+        }
+        //
+        xiaomi {
+            dimension "features"
+            applicationId "com.plat.xiaomi"
+            manifestPlaceholders = ["Demo_DeviceVersion_Value": "${buildTime()}"]
+            versionCode 1
+            versionName "1.0.1"
+        }
+
+    }
+
+    //修改生成的apk名字
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = outputFile.name.replace("app-", "RS_${variant.versionName}_${buildTime().replace('-', '.')}_")
+                fileName = fileName.replace("-release", "")
+//                fileName = fileName.replace("-debug", "")
+                outputFileName = fileName
+            }
         }
     }
 }
 
+static def buildTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
