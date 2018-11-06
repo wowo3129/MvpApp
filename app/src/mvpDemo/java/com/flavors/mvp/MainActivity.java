@@ -1,14 +1,12 @@
-package thread;
+package com.flavors.mvp;
 
 import android.os.Bundle;
 import android.widget.Toast;
 
-
+import com.flavors.mvp.base.BaseActivity;
+import com.flavors.mvp.presenter.MainPresenter;
+import com.flavors.mvp.view.IMainView;
 import com.plat.sdk.R;
-
-import thread.base.BaseActivity;
-import thread.presenter.MainPresenter;
-import thread.view.IMainView;
 
 /**
  * @author ydong

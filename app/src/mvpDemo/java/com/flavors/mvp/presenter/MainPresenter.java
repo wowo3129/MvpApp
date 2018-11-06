@@ -1,11 +1,10 @@
-package thread.presenter;
+package com.flavors.mvp.presenter;
 
 
-import com.plat.sdk.model.IModel;
-
-import thread.base.BasePresenter;
-import thread.model.MainModelImpl;
-import thread.view.IMainView;
+import com.flavors.mvp.base.BasePresenter;
+import com.flavors.mvp.model.IModel;
+import com.flavors.mvp.model.MainModelImpl;
+import com.flavors.mvp.view.IMainView;
 
 /**
  * @author ydong

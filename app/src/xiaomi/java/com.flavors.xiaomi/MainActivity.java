@@ -1,4 +1,4 @@
-package com.xiaomi;
+package com.flavors.xiaomi;
 
 import android.app.Activity;
 import android.os.Bundle;

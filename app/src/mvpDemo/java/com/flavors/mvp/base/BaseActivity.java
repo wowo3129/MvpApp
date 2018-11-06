@@ -1,4 +1,4 @@
-package thread.base;
+package com.flavors.mvp.base;
 
 
 import android.support.v7.app.AppCompatActivity;

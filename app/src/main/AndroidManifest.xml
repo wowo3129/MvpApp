@@ -42,7 +42,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="user"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity android:name="thread.MainActivity" />
     </application>
 
 </manifest>

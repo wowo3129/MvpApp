@@ -1,6 +1,5 @@
-package thread.model;
+package com.flavors.mvp.model;
 
-import com.plat.sdk.model.IModel;
 
 /**
  * @author ydong

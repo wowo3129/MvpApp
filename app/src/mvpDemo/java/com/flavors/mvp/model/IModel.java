@@ -1,4 +1,4 @@
-package thread.model;
+package com.flavors.mvp.model;
 
 /**
  * @author ydong

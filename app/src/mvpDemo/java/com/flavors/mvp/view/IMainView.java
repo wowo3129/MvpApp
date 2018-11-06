@@ -1,4 +1,4 @@
-package thread.view;
+package com.flavors.mvp.view;
 
 /**
  * @author ydong

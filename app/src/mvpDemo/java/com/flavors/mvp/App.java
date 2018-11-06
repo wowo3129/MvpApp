@@ -1,4 +1,4 @@
-package thread;
+package com.flavors.mvp;
 
 import com.plat.sdk.MainApplication;
 

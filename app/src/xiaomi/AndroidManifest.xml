@@ -4,14 +4,15 @@
     package="com.plat.sdk">
 
     <application
-        android:name="com.xiaomi.App"
+        android:name="com.flavors.xiaomi.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:node="replace">
+        tools:replace="icon,label,theme">
+        <!--tools:replace="icon,label,theme" 替代父类application的icon label theme属性-->
 
         <meta-data
             android:name="VERSION_BUILD_DATE"
@@ -26,7 +27,7 @@
             tools:node="replace" />
 
         <activity
-            android:name="com.xiaomi.MainActivity"
+            android:name="com.flavors.xiaomi.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
             android:screenOrientation="user"
