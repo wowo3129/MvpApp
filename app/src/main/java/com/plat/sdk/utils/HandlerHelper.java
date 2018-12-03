@@ -42,8 +42,9 @@ public class HandlerHelper {
      * @param handlerThreadName 线程名
      * @return
      */
-    public final Handler createThreadHandler(String handlerThreadName) {
-        return new Handler(this.createThread(handlerThreadName).getLooper());
+    public Handler createThreadHandler(String handlerThreadName) {
+        Looper looper = this.createThread(handlerThreadName).getLooper();
+        return new Handler(looper);
     }
 
     /**
