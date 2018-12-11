@@ -11,27 +11,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
         tools:replace="icon,label,theme">
-        <!--tools:replace="icon,label,theme" 替代父类application的icon label theme属性-->
+
+        <!-- tools:replace="icon,label,theme" 替代父类application的icon label theme属性 -->
 
         <meta-data
             android:name="VERSION_BUILD_DATE"
             android:value=":${Demo_DeviceVersion_Value}" />
 
         <activity
-            android:name="com.plat.sdk.MainActivity"
+            android:name=".MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
             android:screenOrientation="user"
             android:windowSoftInputMode="stateUnchanged|adjustPan"
             tools:node="replace" />
-
         <activity
             android:name="com.flavors.xiaomi.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
             android:screenOrientation="user"
             android:windowSoftInputMode="stateUnchanged|adjustPan">
+
+        </activity>
+        <activity android:name="com.flavors.xiaomi.RxJavaAndRetrofit.RxRetrofitActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,6 +45,5 @@
             </intent-filter>
         </activity>
     </application>
-
 
 </manifest>

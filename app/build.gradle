@@ -97,6 +97,9 @@ static def buildTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 
+def retrofit_version = "2.1.0"
+def rxjava_version = "2.0.1"
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
@@ -105,4 +108,20 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //zhangxutong add:
+    //RxJava的依赖包
+    implementation 'io.reactivex.rxjava2:rxjava:' + rxjava_version
+    //RxAndroid的依赖包
+    implementation 'io.reactivex.rxjava2:rxandroid:' + rxjava_version
+    //Rxjava 和 Retrofit 的依赖库，将接口数据转换为rxjava数据形式供我们使用
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0-RC3'
+    //Retrofit 依赖
+    implementation 'com.squareup.retrofit2:retrofit:' + retrofit_version
+    //自动将服务器数据给我们转换成javabean实体类
+    implementation 'com.squareup.retrofit2:converter-gson:' + retrofit_version
+    implementation 'com.google.code.gson:gson:2.6.2'
+    //okhttp日志拦截器
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.3.0'
+
+
 }
