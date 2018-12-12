@@ -14,4 +14,26 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:text="GankAPI-GET" />
+
+    <Button
+        android:id="@+id/gankAPiGetWithUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="79dp"
+        android:text="GankAPI-Url" />
+
+    <Button
+        android:id="@+id/gankAPiPOST"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="0dp"
+        android:text="GankAPI-POST" />
+
+
 </RelativeLayout>
