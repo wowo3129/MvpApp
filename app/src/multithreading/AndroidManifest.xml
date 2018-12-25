@@ -32,16 +32,27 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
             android:screenOrientation="user"
-            android:windowSoftInputMode="stateUnchanged|adjustPan">
-
-        </activity>
-        <activity android:name="com.flavors.xiaomi.RxJavaAndRetrofit.RxRetrofitActivity">
-            <intent-filter>
+            android:windowSoftInputMode="stateUnchanged|adjustPan" />
+        <activity
+            android:name="com.flavors.xiaomi.RxJavaAndRetrofit.RxRetrofitActivity"
+            tools:ignore="InnerclassSeparator">
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.HOME" />
+            </intent-filter>-->
+        </activity>
+
+        <service
+            android:name="com.flavors.xiaomi.service.MyService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name="com.flavors.xiaomi.service.ServiceActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

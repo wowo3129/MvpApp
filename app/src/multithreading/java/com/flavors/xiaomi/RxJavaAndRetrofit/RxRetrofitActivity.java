@@ -1,7 +1,10 @@
 package com.flavors.xiaomi.RxJavaAndRetrofit;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,11 +25,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * @author ydong
  */
-public class RxRetrofitActivity extends AppCompatActivity {
+public class RxRetrofitActivity extends /*AppCompat*/Activity {
     @BindView(R.id.gankAPiGet) Button gankAPiGet;
     @BindView(R.id.gankAPiGetWithUrl) Button gankAPiGetWithUrl;
     @BindView(R.id.gankAPiPOST) Button gankAPiPOST;
     private Unbinder bind;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,45 @@ public class RxRetrofitActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rx_retrofit);
         bind = ButterKnife.bind(this);
 
+        if (savedInstanceState != null) {
+            int current = savedInstanceState.getInt("CURRENT");
+        }
+
+    }
+
+
+    /**
+     * <p>If called, this method will occur before {@link #onStop}.  There are
+     * no guarantees about whether it will occur before or after {@link #onPause}.
+     *
+     * @param outState
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("CURRENT", 11);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        int current = savedInstanceState.getInt("CURRENT");
+
+    }
+
+
+    /**
+     * Note that {@link #getIntent} still returns the original Intent.
+     *
+     * @param intent The new intent that was started for the activity.
+     *               疑问:这两个方法怎么使用的?新旧数据怎么来的
+     *               onPaused onNewIntent onResume
+     */
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        getIntent().getStringExtra("data");
     }
 
     @OnClick({R.id.gankAPiGet, R.id.gankAPiPOST, R.id.gankAPiGetWithUrl})
@@ -126,4 +169,5 @@ public class RxRetrofitActivity extends AppCompatActivity {
         super.onDestroy();
         bind.unbind();
     }
+
 }
