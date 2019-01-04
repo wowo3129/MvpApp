@@ -61,9 +61,9 @@ android {
     flavorDimensions "features"
     productFlavors {
         // 线程相关Demo
-        BaseMvp {
+        basemvp {
             dimension "features"
-            applicationId "com.plat.basemvp"
+            applicationId "com.flavors.mvp"
             manifestPlaceholders = ["Demo_DeviceVersion_Value": "${buildTime()}"]
             versionCode 1
             versionName "1.0.1"
@@ -71,7 +71,7 @@ android {
         //
         multithreading {
             dimension "features"
-            applicationId "com.plat.multithreading"
+            applicationId "com.flavors.xiaomi"
             manifestPlaceholders = ["Demo_DeviceVersion_Value": "${buildTime()}"]
             versionCode 1
             versionName "1.0.1"

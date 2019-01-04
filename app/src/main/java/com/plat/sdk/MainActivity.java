@@ -1,45 +1,19 @@
 package com.plat.sdk;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Toast;
-
-import com.plat.sdk.base.BaseActivity;
-import com.plat.sdk.presenter.MainPresenter;
-import com.plat.sdk.view.IMainView;
 
 
 /**
  * @author ydong
  */
-public class MainActivity extends BaseActivity<IMainView, MainPresenter> implements IMainView {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initData();
     }
 
-    private void initData() {
-        /*直接调用父类里的presenter实例*/
-        String navigationData = presenter.getNavigationData();
-        Toast.makeText(this, navigationData, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * 在抽象类{@link BaseActivity#createPresenter()}里写一个未实现的方法，
-     * 这里通过实例化返回实例对象，在抽象类里的{@link BaseActivity#onCreate(Bundle)}
-     *
-     * @return MainPresenter 实例
-     */
-    @Override
-    public MainPresenter createPresenter() {
-        return new MainPresenter();
-    }
-
-    @Override
-    public String getData() {
-        return "初始化地图";
-    }
 
 }

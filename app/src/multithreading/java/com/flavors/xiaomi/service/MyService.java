@@ -1,5 +1,6 @@
 package com.flavors.xiaomi.service;
 
+import android.app.IntentService;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -40,6 +41,14 @@ public class MyService extends Service {
 
         Notification notification = builer.getNotification();//将Builder对象转变成普通的notification
         startForeground(1, notification);//让Service变成前台Service,并在系统的状态栏显示出来
+        //变成前台Service
+
+        new IntentService("handleThread") {
+            @Override
+                protected void onHandleIntent(@Nullable Intent intent) {
+                // TODO: 2018/12/26 耗时业务
+            }
+        };
 
     }
 
