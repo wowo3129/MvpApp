@@ -51,9 +51,14 @@ public class FutureTest1 {
 
         // 创建线程池（使用了预定义的配置）
         threadExec(future);
+        try {
+            Thread.sleep(600);
+            // 可以取消异步任务
+            future.cancel(true);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        // 可以取消异步任务
-//         future.cancel(true);
         try {
             // 阻塞，等待异步任务执行完毕-获取异步任务的返回值
             System.out.println("future.get():" + future.get());

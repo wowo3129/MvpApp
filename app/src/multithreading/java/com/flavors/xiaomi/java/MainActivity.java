@@ -63,4 +63,10 @@ public class MainActivity extends Activity {
         myAsyncTask.execute(strings);
 
     }
+
+    public static void main(String[] args) {
+        String str = "09:24:09.588 D/ydong [main, processIATResult(NlpDemo.java:600)]: FINAL_RESULT---->深圳今天的天气怎么样<----【3】";
+        String ls = str.substring(str.indexOf("---->") + 1, str.lastIndexOf("<----"));
+        System.out.println(ls);
+    }
 }

@@ -38,12 +38,12 @@ public class MyAsyncTask extends AsyncTask<String, Integer, String> {
             publishProgress(i);
             Log.d("ydong", "doInBackground 子线程-->" + strings[i]);
             //如果AsyncTask被调用了cancel()方法，那么任务取消，跳出for循环
-            /*if (i == 2) {
+            if (i == 2) {
                 cancel(true);
                 if (isCancelled()) {
                     break;
                 }
-            }*/
+            }
 
         }
         return null;
@@ -114,5 +114,11 @@ public class MyAsyncTask extends AsyncTask<String, Integer, String> {
      */
     public MyAsyncTask() {
         super();
+    }
+
+    public static void main(String[] args) {
+        MyAsyncTask myAsyncTask = new MyAsyncTask();
+        String[] strings = {"12", "122", "1234", "12345"};
+        myAsyncTask.execute(strings);
     }
 }

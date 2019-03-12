@@ -77,6 +77,14 @@ android {
             versionName "1.0.1"
         }
 
+        myLiveData {
+            dimension "features"
+            applicationId "com.flavors.livedata"
+            manifestPlaceholders = ["Demo_DeviceVersion_Value": "${buildTime()}"]
+            versionCode 1
+            versionName "1.0.1"
+        }
+
     }
 
     //修改生成的apk名字
@@ -101,7 +109,7 @@ def retrofit_version = "2.1.0"
 def rxjava_version = "2.0.1"
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.jakewharton:butterknife:8.8.1'
@@ -123,5 +131,9 @@ dependencies {
     //okhttp日志拦截器
     implementation 'com.squareup.okhttp3:logging-interceptor:3.3.0'
 
-
+    //Android Architecture Component依赖 ydong
+    implementation "android.arch.lifecycle:extensions:1.1.0"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
+    testImplementation "android.arch.core:core-testing:1.1.0"
+    //ydong
 }

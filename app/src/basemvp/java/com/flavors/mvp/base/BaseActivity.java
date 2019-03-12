@@ -37,5 +37,6 @@ public abstract class BaseActivity<V, P extends BasePresenter<V>> extends AppCom
     protected void onDestroy() {
         super.onDestroy();
         presenter.detachView();
+        ListView
     }
 }
