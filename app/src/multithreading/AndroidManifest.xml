@@ -39,14 +39,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.flavors.xiaomi.RxJavaAndRetrofit.RxRetrofitActivity"
+            android:name="com.flavors.xiaomi.rx.RxRetrofitActivity"
             tools:ignore="InnerclassSeparator">
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.HOME" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
 
         <service

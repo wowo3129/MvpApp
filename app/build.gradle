@@ -136,4 +136,7 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
     testImplementation "android.arch.core:core-testing:1.1.0"
     //ydong
+    //权限添加
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+    implementation project(path: ':iflylib')
 }

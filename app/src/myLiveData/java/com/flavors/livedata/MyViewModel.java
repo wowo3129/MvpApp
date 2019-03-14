@@ -9,9 +9,14 @@ import android.arch.lifecycle.ViewModel;
 public class MyViewModel extends ViewModel {
 
     private MutableLiveData<Integer> mutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<String> result = new MutableLiveData<>();
 
     public MutableLiveData<Integer> getMutableLiveData() {
         return mutableLiveData;
+    }
+
+    public MutableLiveData<String> getResultLiveData() {
+        return result;
     }
 
     public MyViewModel() {
@@ -22,5 +27,8 @@ public class MyViewModel extends ViewModel {
     public void initData() {
         mutableLiveData.setValue(9);
     }
+
+
+
 
 }
