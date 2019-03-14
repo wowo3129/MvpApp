@@ -6,4 +6,5 @@
 <br/>5、RxJavaAndRetrofit 目录下学习案例</br>
 <br/>6、使用RxJava、Retrofit + AsyncTask 实现下载</br>
 <br/>7、LiveData相关的Demo</br>
+<br/>7、增加讯飞的在线语音识别、合成SDK、图灵的后台请求</br>
 
