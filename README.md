@@ -5,7 +5,7 @@
 共同特点：实现了全双工语音识别iat、合成tts、和语义nlp部分接口的封装,经过稳定测试，通过简洁的调用方式来满足开发需求。两者核心类都是 SpeechManager</br>
 ***
 # MvpApp
-<br/>1、涉及到的知识点：MVP、 WeakReference、泛型、分渠道开发APP、</br>
+<br/>1、涉及到的知识点：MVP、 WeakReference、泛型、[分渠道开发APP](https://www.jianshu.com/p/533240d222d3)、</br>
 <br/>2、线城池Worker 和 手写死锁的案例：DeadLockTest</br>
 <br/>3、BUGLY 的升级、埋点</br>
 <br/>4、MyAsyncTask、FutureTest1 源码分析</br>
