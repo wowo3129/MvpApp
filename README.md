@@ -14,6 +14,7 @@
 <br/>7、LiveData相关的myLiveData案例</br>
 <br/>7、增加讯飞的在线语音识别、合成SDK:[iflylib](https://github.com/wowo3129/MvpApp/tree/master/iflylib)、图灵的后台请求-参考myLiveData里面的代码</b>
 </br>8、[pcm转wav](https://blog.csdn.net/hesong1120/article/details/79043482)</br>
+</br>9、[imageLoader:新增加图片加载、inSampleSize压缩、LRU缓存、网络拉取、优化图片快速滑动卡顿的DEMO](https://github.com/wowo3129/MvpApp/tree/master/app/src/imageLoader)
 ***
 [Showdoc笔记整理](https://www.showdoc.cc/anzerComputer?page_id=1113515797108060)
 
