@@ -2,6 +2,7 @@ package com.ydong.iflylib;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 
 import com.ydong.iflylib.listener.IRecognizerListener;
@@ -62,7 +63,7 @@ public class RecognizerHelper {
     }
 
     /**
-     * 初始化
+     * 初始化语音识别功能模块
      *
      * @param context
      */
@@ -302,8 +303,8 @@ public class RecognizerHelper {
 
         // 设置音频保存路径，保存音频格式支持pcm、wav，设置路径为sd卡请注意WRITE_EXTERNAL_STORAGE权限
         // 注：AUDIO_FORMAT参数语记需要更新版本才能生效
-//        mIat.setParameter(SpeechConstant.AUDIO_FORMAT,"wav");
-//        mIat.setParameter(SpeechConstant.ASR_AUDIO_PATH, Environment.getExternalStorageDirectory()+"/msc/iat.wav");
+        mIat.setParameter(SpeechConstant.AUDIO_FORMAT, "wav");
+        mIat.setParameter(SpeechConstant.ASR_AUDIO_PATH, Environment.getExternalStorageDirectory() + "/msc/iat.wav");
     }
 
 }

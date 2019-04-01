@@ -28,11 +28,20 @@ public class SpeechManager {
         return SingletonHolder.INSTANCE;
     }
 
-
+    /**
+     * 在application 中初始化语音基础模块
+     *
+     * @param context
+     */
     public void init(Context context) {
         SpeechUtility.createUtility(context, "appid=" + context.getString(R.string.appid));
     }
 
+    /**
+     * 初始化语音识别和合成模块
+     *
+     * @param context
+     */
     public void initStart(Context context) {
         RecognizerHelper.getInstance().init(context);
         TtsHelper.getInstance().init(context);

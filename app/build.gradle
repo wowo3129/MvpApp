@@ -84,6 +84,17 @@ android {
             versionCode 1
             versionName "1.0.1"
         }
+        /**
+         * BitMap的加载和Cache
+         * https://github.com/wowo3129/android-art-res/tree/master/Chapter_12
+         */
+        imageLoader {
+            dimension "features"
+            applicationId "com.flavors.imageLoader"
+            manifestPlaceholders = ["Demo_DeviceVersion_Value": "${buildTime()}"]
+            versionCode 1
+            versionName "1.0.1"
+        }
 
     }
 

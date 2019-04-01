@@ -36,7 +36,11 @@ public class TtsHelper {
         return SingletonHolder.INSTANCE;
     }
 
-
+    /**
+     * 初始化语音合成模块
+     *
+     * @param context
+     */
     public void init(Context context) {
         this.mContext = context;
         // 初始化合成对象
@@ -85,7 +89,6 @@ public class TtsHelper {
     }
 
 
-
     public void stopSpeak() {
         if (mTts == null)
             return;
@@ -100,14 +103,12 @@ public class TtsHelper {
     }
 
     public void destory() {
-        if( null != mTts ){
+        if (null != mTts) {
             mTts.stopSpeaking();
             // 退出时释放连接
             mTts.destroy();
         }
     }
-
-
 
 
     /**
@@ -118,7 +119,7 @@ public class TtsHelper {
         public void onInit(int code) {
             Logger.error("InitListener init() code = " + code);
             if (code != ErrorCode.SUCCESS) {
-                Logger.error("初始化失败,错误码："+code);
+                Logger.error("初始化失败,错误码：" + code);
             } else {
                 // 初始化成功，之后可以调用startSpeaking方法
                 // 注：有的开发者在onCreate方法中创建完合成对象之后马上就调用startSpeaking进行合成，
@@ -128,26 +129,26 @@ public class TtsHelper {
     };
 
 
-
     /**
      * 参数设置
+     *
      * @return
      */
-    private void setParam(){
+    private void setParam() {
         // 清空参数
         mTts.setParameter(SpeechConstant.PARAMS, null);
         // 根据合成引擎设置相应参数
-        if(mEngineType.equals(SpeechConstant.TYPE_CLOUD)) {
+        if (mEngineType.equals(SpeechConstant.TYPE_CLOUD)) {
             mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD);
             // 设置在线合成发音人
             mTts.setParameter(SpeechConstant.VOICE_NAME, voicer);
             //设置合成语速
-            mTts.setParameter(SpeechConstant.SPEED,"50");
+            mTts.setParameter(SpeechConstant.SPEED, "50");
             //设置合成音调
             mTts.setParameter(SpeechConstant.PITCH, "50");
             //设置合成音量
             mTts.setParameter(SpeechConstant.VOLUME, "50");
-        }else {
+        } else {
             mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_LOCAL);
             // 设置本地合成发音人 voicer为空，默认通过语记界面指定发音人。
             mTts.setParameter(SpeechConstant.VOICE_NAME, "");

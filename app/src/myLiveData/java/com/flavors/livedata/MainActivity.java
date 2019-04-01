@@ -51,6 +51,11 @@ public class MainActivity extends AppCompatActivity implements ISpeakListener, I
         myViewModel.getMutableLiveData().observe(this, integer -> {
             Log.d("ydong", "result::" + integer);
         });
+        myViewModel.getResultLiveData().observe(this, s -> {
+            if (s.equals("安静")) {
+                SpeechManager.getInstance().stopSpeak();
+            }
+        });
     }
 
 
@@ -77,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements ISpeakListener, I
     @Override
     public void onResult(String result) {
         // TODO: 2019/3/14 语音识别结果
+        myViewModel.getResultLiveData().setValue(result);
         requestApiByRetrofit_RxJava(result);
     }
 
