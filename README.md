@@ -17,6 +17,7 @@
 </br>9、[imageLoader:新增加图片加载、inSampleSize压缩、LRU缓存、网络拉取、优化图片快速滑动卡顿的DEMO](https://github.com/wowo3129/MvpApp/tree/master/app/src/imageLoader)
 </br>10、[SQLiteOpenHelper之onUpgrade例子](https://www.cnblogs.com/896240130Master/p/6128557.html)
 </br>11、[websocket](https://www.jianshu.com/p/e294e6baa158)
+</br>12、[微信接口的研究](https://github.com/changtuiqie)
 ***
 [Showdoc笔记整理](https://www.showdoc.cc/anzerComputer?page_id=1113515797108060)
 
