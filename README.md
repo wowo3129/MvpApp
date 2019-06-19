@@ -18,7 +18,7 @@
 </br>10、[SQLiteOpenHelper之onUpgrade例子](https://www.cnblogs.com/896240130Master/p/6128557.html)
 </br>11、[websocket](https://www.jianshu.com/p/e294e6baa158)
 </br>12、[微信接口的研究](https://github.com/changtuiqie)
-</br>13、[京东到家基于netty与websocket的实践](https://mp.weixin.qq.com/s?src=11&timestamp=1559785798&ver=1651&signature=r5F5TAewbady2mrpvwSZiBW65D*SmT7TZlgefPFl1JLA6uFmL*WiqS6kpqaMt5dehRWjtuysH6v-3vRI0m5xIpN-d8KgS6S3SXqocHKs3Jm3VHQGbe75KuWb8cjemEqj&new=1)
+</br>13、[京东到家基于netty与websocket的实践](https://weixin.sogou.com/)
 ***
 [Showdoc笔记整理](https://www.showdoc.cc/anzerComputer?page_id=1113515797108060)
 
