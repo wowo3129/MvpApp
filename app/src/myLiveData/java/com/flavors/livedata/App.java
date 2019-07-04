@@ -3,6 +3,9 @@ package com.flavors.livedata;
 import com.ydong.iflylib.SpeechManager;
 import com.plat.sdk.MainApplication;
 
+/**
+ * @author ydong
+ */
 public class App extends MainApplication {
     @Override
     public void onCreate() {

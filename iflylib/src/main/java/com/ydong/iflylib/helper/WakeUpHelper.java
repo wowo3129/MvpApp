@@ -1,4 +1,4 @@
-package com.ydong.iflylib;
+package com.ydong.iflylib.helper;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,20 +13,21 @@ import com.iflytek.cloud.VoiceWakeuper;
 import com.iflytek.cloud.WakeuperListener;
 import com.iflytek.cloud.WakeuperResult;
 import com.iflytek.cloud.util.ResourceUtil;
+import com.ydong.iflylib.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by kermitye
- * Date: 2018/8/7 10:29
- * Desc:
+ * @author ydong
  */
 public class WakeUpHelper {
     private static final String TAG = WakeUpHelper.class.getSimpleName();
 
     private Context mContext;
-    //唤醒对象
+    /**
+     * 唤醒对象
+     */
     private VoiceWakeuper mIvw;
 
     private String keep_alive = "1";
@@ -34,7 +35,8 @@ public class WakeUpHelper {
     private int curThresh = 1450;
 
 
-    private WakeUpHelper() {}
+    private WakeUpHelper() {
+    }
 
     private static class SingletonHolder {
         public static final WakeUpHelper INSTANCE = new WakeUpHelper();
@@ -103,7 +105,7 @@ public class WakeUpHelper {
                 return;
             }
 
-            if(!"1".equalsIgnoreCase(keep_alive)) {
+            if (!"1".equalsIgnoreCase(keep_alive)) {
 //                setRadioEnable(true);
             }
             try {
@@ -111,11 +113,11 @@ public class WakeUpHelper {
                 JSONObject object;
                 object = new JSONObject(text);
                 StringBuffer buffer = new StringBuffer();
-                buffer.append("【RAW】 "+text);
+                buffer.append("【RAW】 " + text);
                 buffer.append("\n");
-                buffer.append("【操作类型】"+ object.optString("sst"));
+                buffer.append("【操作类型】" + object.optString("sst"));
                 buffer.append("\n");
-                buffer.append("【唤醒词id】"+ object.optString("id"));
+                buffer.append("【唤醒词id】" + object.optString("id"));
                 buffer.append("\n");
                 buffer.append("【得分】" + object.optString("score"));
                 buffer.append("\n");
@@ -132,8 +134,7 @@ public class WakeUpHelper {
 
         @Override
         public void onError(SpeechError error) {
-            //唤醒失败
-            Logger.error(TAG, "唤醒失败:" + error.getErrorCode() + " / " + error.getErrorDescription() );
+            Log.e(TAG, "唤醒失败:" + error.getErrorCode() + " / " + error.getErrorDescription());
             mIvw = VoiceWakeuper.getWakeuper();
             if (mIvw != null) {
                 mIvw.startListening(mWakeuperListener);
@@ -147,34 +148,33 @@ public class WakeUpHelper {
          */
         @Override
         public void onBeginOfSpeech() {
-            Logger.error(TAG, "唤醒开始" );
+            Log.e(TAG, "唤醒开始");
         }
 
         @Override
         public void onEvent(int eventType, int isLast, int arg2, Bundle obj) {
-            Logger.error(TAG, "onEvent" );
-            switch( eventType ){
+            Log.e(TAG, "onEvent");
+            switch (eventType) {
                 // EVENT_RECORD_DATA 事件仅在 NOTIFY_RECORD_DATA 参数值为 真 时返回
                 case SpeechEvent.EVENT_RECORD_DATA:
-                    final byte[] audio = obj.getByteArray( SpeechEvent.KEY_EVENT_RECORD_DATA );
-                    Log.i( TAG, "ivw audio length: "+audio.length );
+                    final byte[] audio = obj.getByteArray(SpeechEvent.KEY_EVENT_RECORD_DATA);
+                    Log.i(TAG, "ivw audio length: " + audio.length);
+                    break;
+                default:
                     break;
             }
         }
 
         @Override
         public void onVolumeChanged(int volume) {
-//            showTip("当前音量："+volume);
-            Logger.error(TAG, "当前音量:" + volume);
+            Log.e(TAG, "当前音量:" + volume);
         }
     };
 
 
-
-
     private String getResource() {
-        final String resPath = ResourceUtil.generateResourcePath(mContext, ResourceUtil.RESOURCE_TYPE.assets, "ivw/"+ mContext.getString(R.string.appid)+".jet");
-        Log.d( TAG, "resPath: "+resPath );
+        final String resPath = ResourceUtil.generateResourcePath(mContext, ResourceUtil.RESOURCE_TYPE.assets, "ivw/" + mContext.getString(R.string.appid) + ".jet");
+        Log.d(TAG, "resPath: " + resPath);
         return resPath;
     }
 

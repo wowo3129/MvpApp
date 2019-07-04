@@ -1,54 +1,49 @@
 package com.ydong.iflylib.listener;
 
 import android.os.Bundle;
+import android.util.Log;
 
-import com.ydong.iflylib.Logger;
 import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.SynthesizerListener;
 
 /**
- * Created by kermitye
- * Date: 2018/5/23 19:05
- * Desc:
+ * @author ydong
  */
-public abstract class SpeakListener implements SynthesizerListener,ISpeakListener {
+public abstract class SpeakListener implements SynthesizerListener, ISpeakListener {
+    private static final String TAG = "SpeakListener";
+
     @Override
     public void onSpeakBegin() {
-        Logger.error("开始播放");
+        Log.d(TAG, "开始播放");
     }
 
     @Override
     public void onSpeakPaused() {
-        Logger.error("暂停播放");
+        Log.d(TAG, "暂停播放");
     }
 
     @Override
     public void onSpeakResumed() {
-        Logger.error("继续播放");
+        Log.d(TAG, "继续播放");
     }
 
     @Override
-    public void onBufferProgress(int percent, int beginPos, int endPos,
-                                 String info) {
-        // 合成进度
-//            mPercentForBuffering = percent;
-        Logger.error("缓冲进度为" + percent + "%");
+    public void onBufferProgress(int percent, int beginPos, int endPos, String info) {
+        Log.d(TAG, "缓冲进度为" + percent + "%");
     }
 
     @Override
     public void onSpeakProgress(int percent, int beginPos, int endPos) {
-        // 播放进度
-//            mPercentForPlaying = percent;
-        Logger.error("播放进度为" + percent + "%");
+        Log.d(TAG, "播放进度为" + percent + "%");
     }
 
     @Override
     public void onCompleted(SpeechError error) {
         if (error == null) {
-//            Logger.error("播放完成");
+            Log.d(TAG, "播放完成");
             onSpeakOver("");
-        } else if (error != null) {
-            Logger.error(error.getPlainDescription(true));
+        } else {
+            Log.d(TAG, error.getPlainDescription(true));
             onSpeakOver(error.getPlainDescription(true));
         }
 
@@ -63,7 +58,7 @@ public abstract class SpeakListener implements SynthesizerListener,ISpeakListene
         //		Log.d(TAG, "session id =" + sid);
         //	}
 
-        /**
+        /*
          * 被打断
          */
         if (eventType == 21002) {

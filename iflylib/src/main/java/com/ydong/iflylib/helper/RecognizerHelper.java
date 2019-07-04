@@ -1,4 +1,4 @@
-package com.ydong.iflylib;
+package com.ydong.iflylib.helper;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -21,9 +21,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 /**
- * Created by kermitye
- * Date: 2018/5/23 15:05
- * Desc: 讯飞听写辅助类
+ * 讯飞听写辅助类
  *
  * @author ydong
  */
@@ -73,7 +71,7 @@ public class RecognizerHelper {
     }
 
     /**
-     * 听写回调
+     * 识别回调
      *
      * @param listener
      */
@@ -91,7 +89,7 @@ public class RecognizerHelper {
                 mIRecognizerListener.onError("创建对象失败，请确认 libmsc.so 放置正确，且有调用 createUtility 进行初始化");
             }
             // 创建单例失败，与 21001 错误为同样原因，参考 http://bbs.xfyun.cn/forum.php?mod=viewthread&tid=9688
-            Logger.error("创建对象失败，请确认 libmsc.so 放置正确，且有调用 createUtility 进行初始化");
+            Log.e(TAG, "创建对象失败，请确认 libmsc.so 放置正确，且有调用 createUtility 进行初始化");
             return;
         }
         mIatResults.clear();
@@ -103,7 +101,7 @@ public class RecognizerHelper {
             if (mIRecognizerListener != null) {
                 mIRecognizerListener.onError("听写失败,错误码：" + ret);
             }
-            Logger.error("听写失败,错误码：" + ret);
+            Log.e(TAG, "听写失败,错误码：" + ret);
         }
     }
 
@@ -111,18 +109,19 @@ public class RecognizerHelper {
      * 停止识别
      */
     public void stopRecognizer() {
-        if (mIat == null)
+        if (mIat == null) {
             return;
+        }
         mIsRec = false;
         mIat.cancel();
 //        mIat.stopListening();
-        Logger.error("停止听写");
+        Log.e(TAG, "停止听写");
     }
 
 
     public void destory() {
         if (null != mIat) {
-            Logger.error("退出释放");
+            Log.e(TAG, "退出释放");
             // 退出时释放连接
             mIat.cancel();
             mIat.destroy();
@@ -141,8 +140,7 @@ public class RecognizerHelper {
                 if (mIRecognizerListener != null) {
                     mIRecognizerListener.onError("初始化失败,错误码:" + code);
                 }
-                Logger.error("初始化失败,错误码:" + code);
-//                showTip("初始化失败，错误码：" + code);
+                Log.e(TAG, "初始化失败,错误码:" + code);
             }
         }
     };
@@ -156,7 +154,7 @@ public class RecognizerHelper {
         @Override
         public void onBeginOfSpeech() {
             // 此回调表示：sdk内部录音机已经准备好了，用户可以开始语音输入
-            Logger.error("开始说话");
+            Log.d(TAG, "开始说话");
         }
 
         @Override
@@ -164,13 +162,13 @@ public class RecognizerHelper {
             // Tips：
             // 错误码：10118(您没有说话)，可能是录音机权限被禁，需要提示用户打开应用的录音权限。
             /*if(mTranslateEnable && error.getErrorCode() == 14002) {
-                Logger.error( error.getPlainDescription(true)+"\n请确认是否已开通翻译功能" );
+                Log.e(TAG,( error.getPlainDescription(true)+"\n请确认是否已开通翻译功能" );
             } else {
 
             }*/
             try {
                 String msg = error.getPlainDescription(true);
-                Logger.error(msg);
+                Log.e(TAG, msg);
                 if (mIRecognizerListener != null) {
                     mIRecognizerListener.onError(msg);
                 }
@@ -185,12 +183,12 @@ public class RecognizerHelper {
         @Override
         public void onEndOfSpeech() {
             // 此回调表示：检测到了语音的尾端点，已经进入识别过程，不再接受语音输入
-            Logger.error("结束说话");
+            Log.e(TAG, "结束说话");
         }
 
         @Override
         public void onResult(RecognizerResult results, boolean isLast) {
-            Logger.error(results.getResultString());
+            Log.e(TAG, results.getResultString());
 //            startRecognizer();
 
             printResult(results);
@@ -202,11 +200,10 @@ public class RecognizerHelper {
 
         @Override
         public void onVolumeChanged(int volume, byte[] data) {
-//            Logger.error("当前正在说话，音量大小：" + volume);
+            Log.e(TAG, "当前正在说话，音量大小：" + volume);
             if (mIRecognizerListener != null) {
                 mIRecognizerListener.onVolumeChanged(volume);
             }
-//            Log.d(TAG, "返回音频数据："+data.length);
         }
 
         @Override
@@ -239,7 +236,7 @@ public class RecognizerHelper {
             resultBuffer.append(mIatResults.get(key));
         }
         String result = resultBuffer.toString();
-        Logger.error("听写结果:" + result);
+        Log.e(TAG, "听写结果:" + result);
         if (mIRecognizerListener != null) {
             mIRecognizerListener.onResult(resultBuffer.toString());
         }

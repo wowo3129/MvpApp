@@ -1,4 +1,4 @@
-package com.ydong.iflylib;
+package com.ydong.iflylib.helper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -6,6 +6,7 @@ import org.json.JSONTokener;
 
 /**
  * Json结果解析类
+ * @author ydong
  */
 public class JsonParser {
 

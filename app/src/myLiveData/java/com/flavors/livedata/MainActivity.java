@@ -18,10 +18,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * @author ydong
- * @link {https://blog.csdn.net/Alexwll/article/details/83302173}
- * @link {https://developer.android.google.cn/jetpack/}
  */
-public class MainActivity extends AppCompatActivity implements ISpeakListener, IRecognizerListener {
+public class MainActivity extends AppCompatActivity {
 
     private MyViewModel myViewModel;
 
@@ -33,15 +31,55 @@ public class MainActivity extends AppCompatActivity implements ISpeakListener, I
         initVoice();
         initModel();
         observerModel();
+
     }
 
     private void initVoice() {
         SpeechManager.getInstance().initStart(this);
-        SpeechManager.getInstance().setRecognizerListener(this);
-        /*全局合成监听 适合音量相关UI全局显示*/
-        SpeechManager.getInstance().setSpeakListener(this);
+        SpeechManager.getInstance().setRecognizerListener(iRecognizerListener);
+        SpeechManager.getInstance().setSpeakListener(iSpeakListener);
         SpeechManager.getInstance().startReco();
     }
+
+    /**
+     * 语音识别回调
+     */
+    IRecognizerListener iRecognizerListener = new IRecognizerListener() {
+        @Override
+        public void onVolumeChanged(int volume) {
+
+        }
+
+        @Override
+        public void onResult(String result) {
+            myViewModel.getResultLiveData().setValue(result);
+            requestApiByRetrofitRxJava(result);
+        }
+
+        @Override
+        public void onError(String msg) {
+
+        }
+    };
+    /**
+     * 语音合成回调
+     */
+    ISpeakListener iSpeakListener = new ISpeakListener() {
+        @Override
+        public void onSpeakBegin(String text) {
+
+        }
+
+        @Override
+        public void onSpeakOver(String msg) {
+
+        }
+
+        @Override
+        public void onInterrupted() {
+
+        }
+    };
 
     private void initModel() {
         myViewModel = ViewModelProviders.of(this).get(MyViewModel.class);
@@ -52,47 +90,16 @@ public class MainActivity extends AppCompatActivity implements ISpeakListener, I
             Log.d("ydong", "result::" + integer);
         });
         myViewModel.getResultLiveData().observe(this, s -> {
-            if (s.equals("安静")) {
+            if ("安静".equals(s)) {
                 SpeechManager.getInstance().stopSpeak();
             }
         });
     }
 
-
-    @Override
-    public void onSpeakBegin(String text) {
-        // TODO: 2019/3/14 开始合成
-    }
-
-    @Override
-    public void onSpeakOver(String msg) {
-        // TODO: 2019/3/14 合成结束
-    }
-
-    @Override
-    public void onInterrupted() {
-        // TODO: 2019/3/14 合成中断
-    }
-
-    @Override
-    public void onVolumeChanged(int volume) {
-        // TODO: 2019/3/14 音量改变回调
-    }
-
-    @Override
-    public void onResult(String result) {
-        // TODO: 2019/3/14 语音识别结果
-        myViewModel.getResultLiveData().setValue(result);
-        requestApiByRetrofit_RxJava(result);
-    }
-
-    @Override
-    public void onError(String msg) {
-        // TODO: 2019/3/14 语音识别错误
-    }
-
-    // 请求图灵API接口，获得问答信息
-    private void requestApiByRetrofit_RxJava(String info) {
+    /**
+     * 请求图灵API接口，获得问答信息
+     */
+    private void requestApiByRetrofitRxJava(String info) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(TulingParams.TULING_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -107,9 +114,13 @@ public class MainActivity extends AppCompatActivity implements ISpeakListener, I
                 .subscribe(this::handleResponseMessage, Throwable::printStackTrace);
     }
 
-    // 处理获得到的问答信息
+    /**
+     * 处理获得到的问答信息
+     */
     private void handleResponseMessage(MessageEntity entity) {
-        if (entity == null) return;
+        if (entity == null) {
+            return;
+        }
         Log.d("ydong", "entity.getText()" + entity.getText());
         SpeechManager.getInstance().startSpeak(entity.getText());
         switch (entity.getCode()) {

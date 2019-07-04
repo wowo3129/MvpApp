@@ -1,6 +1,7 @@
-package com.ydong.iflylib;
+package com.ydong.iflylib.helper;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.ydong.iflylib.listener.SpeakListener;
 import com.iflytek.cloud.ErrorCode;
@@ -9,41 +10,43 @@ import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechSynthesizer;
 
 /**
- * Created by kermitye
- * Date: 2018/5/23 15:09
- * Desc: 讯飞合成辅助类
+ * 讯飞合成辅助类
+ *
+ * @author ydong
  */
 public class TtsHelper {
     private static final String TAG = TtsHelper.class.getSimpleName();
 
     private Context mContext;
-    private SpeechSynthesizer mTts;   // 语音合成对象
-    private String voicer = "xiaoyan";// 默认发音人
-    private int mPercentForBuffering = 0;   // 缓冲进度
-    private int mPercentForPlaying = 0; // 播放进度
-    private String mEngineType = SpeechConstant.TYPE_CLOUD; // 引擎类型
+    /**
+     * 语音合成对象
+     */
+    private SpeechSynthesizer mTts;
+    /**
+     * 默认发音人
+     */
+    private String voicer = "xiaoyan";
+    /**
+     * 引擎类型
+     */
+    private String mEngineType = SpeechConstant.TYPE_CLOUD;
     private SpeakListener mSpeakListener;
-
-
-    private TtsHelper() {
-    }
-
-    private static class SingletonHolder {
-        public static final TtsHelper INSTANCE = new TtsHelper();
-    }
+    private static TtsHelper ttsHelper;
 
     public static TtsHelper getInstance() {
-        return SingletonHolder.INSTANCE;
+        if (ttsHelper == null) {
+            ttsHelper = new TtsHelper();
+        }
+        return ttsHelper;
     }
 
     /**
      * 初始化语音合成模块
      *
-     * @param context
+     * @param context 上下文
      */
     public void init(Context context) {
         this.mContext = context;
-        // 初始化合成对象
         mTts = SpeechSynthesizer.createSynthesizer(context, mTtsInitListener);
     }
 
@@ -53,8 +56,9 @@ public class TtsHelper {
 
     public void startSpeak(String text, SpeakListener listener) {
         if (mTts == null) {
-            if (mSpeakListener != null)
+            if (mSpeakListener != null) {
                 mSpeakListener.onSpeakOver("创建对象失败，请确认 libmsc.so 放置正确，且有调用 createUtility 进行初始化");
+            }
             return;
         }
         // 设置参数
@@ -62,7 +66,7 @@ public class TtsHelper {
         int code = mTts.startSpeaking(text, listener);
         listener.onSpeakBegin(text);
         if (code != ErrorCode.SUCCESS) {
-            Logger.error("语音合成失败,错误码: " + code);
+            Log.e(TAG, "语音合成失败,错误码: " + code);
         }
     }
 
@@ -90,36 +94,40 @@ public class TtsHelper {
 
 
     public void stopSpeak() {
-        if (mTts == null)
+        if (mTts == null) {
             return;
+        }
         mTts.stopSpeaking();
     }
 
 
     public boolean isSpeaking() {
-        if (mTts != null)
+        if (mTts != null) {
             return mTts.isSpeaking();
+        }
         return false;
     }
 
+    /**
+     * 退出时停止合成，释放连接
+     */
     public void destory() {
         if (null != mTts) {
             mTts.stopSpeaking();
-            // 退出时释放连接
             mTts.destroy();
         }
     }
 
 
     /**
-     * 初始化监听。
+     * 初始化合成对象监听
      */
     private InitListener mTtsInitListener = new InitListener() {
         @Override
         public void onInit(int code) {
-            Logger.error("InitListener init() code = " + code);
+            Log.e(TAG, "InitListener init() code = " + code);
             if (code != ErrorCode.SUCCESS) {
-                Logger.error("初始化失败,错误码：" + code);
+                Log.e(TAG, "初始化失败,错误码：" + code);
             } else {
                 // 初始化成功，之后可以调用startSpeaking方法
                 // 注：有的开发者在onCreate方法中创建完合成对象之后马上就调用startSpeaking进行合成，
@@ -131,8 +139,6 @@ public class TtsHelper {
 
     /**
      * 参数设置
-     *
-     * @return
      */
     private void setParam() {
         // 清空参数
@@ -152,7 +158,7 @@ public class TtsHelper {
             mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_LOCAL);
             // 设置本地合成发音人 voicer为空，默认通过语记界面指定发音人。
             mTts.setParameter(SpeechConstant.VOICE_NAME, "");
-            /**
+            /*
              * TODO 本地合成不设置语速、音调、音量，默认使用语记设置
              * 开发者如需自定义参数，请参考在线合成参数设置
              */

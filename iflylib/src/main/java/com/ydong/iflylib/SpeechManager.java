@@ -2,36 +2,33 @@ package com.ydong.iflylib;
 
 import android.content.Context;
 
+import com.ydong.iflylib.helper.RecognizerHelper;
+import com.ydong.iflylib.helper.TtsHelper;
 import com.ydong.iflylib.listener.IRecognizerListener;
 import com.ydong.iflylib.listener.ISpeakListener;
 import com.ydong.iflylib.listener.SpeakListener;
 import com.iflytek.cloud.SpeechUtility;
 
 /**
- * Created by kermitye
- * Date: 2018/5/23 14:50
- * Desc: 讯飞语音管理类
+ * 讯飞语音管理类唯一入口,语音识别合成的管理
  *
  * @author ydong
  */
 public class SpeechManager {
 
-    private SpeechManager() {
-
-    }
-
-    private static class SingletonHolder {
-        public static final SpeechManager INSTANCE = new SpeechManager();
-    }
+    private static SpeechManager speechManager;
 
     public static SpeechManager getInstance() {
-        return SingletonHolder.INSTANCE;
+        if (speechManager == null) {
+            speechManager = new SpeechManager();
+        }
+        return speechManager;
     }
 
     /**
      * 在application 中初始化语音基础模块
      *
-     * @param context
+     * @param context 上下文
      */
     public void init(Context context) {
         SpeechUtility.createUtility(context, "appid=" + context.getString(R.string.appid));
@@ -40,7 +37,7 @@ public class SpeechManager {
     /**
      * 初始化语音识别和合成模块
      *
-     * @param context
+     * @param context 上下文
      */
     public void initStart(Context context) {
         RecognizerHelper.getInstance().init(context);
@@ -49,19 +46,32 @@ public class SpeechManager {
 
     //=====================语音听写=================================
 
+    /**
+     * 设置语音识别回调接口
+     *
+     * @param listener 回调接口
+     */
     public void setRecognizerListener(IRecognizerListener listener) {
         RecognizerHelper.getInstance().setIRecognizerListener(listener);
     }
 
-
+    /**
+     * 开始识别
+     */
     public void startReco() {
         RecognizerHelper.getInstance().startRecognizer();
     }
 
+    /**
+     * 暂停识别
+     */
     public void stopReco() {
         RecognizerHelper.getInstance().stopRecognizer();
     }
 
+    /**
+     * 销毁识别
+     */
     public void destoryReco() {
         RecognizerHelper.getInstance().destory();
     }
@@ -69,6 +79,11 @@ public class SpeechManager {
 
     //======================语音合成=======================================
 
+    /**
+     * 设置语音合成接口回调
+     *
+     * @param listener 回调接口
+     */
     public void setSpeakListener(final ISpeakListener listener) {
         TtsHelper.getInstance().setSpeakListener(new SpeakListener() {
             @Override
@@ -89,7 +104,7 @@ public class SpeechManager {
     }
 
     /**
-     * 开水合成
+     * 开始合成
      *
      * @param text     合成的文字
      * @param listener 合成结束后的回调
