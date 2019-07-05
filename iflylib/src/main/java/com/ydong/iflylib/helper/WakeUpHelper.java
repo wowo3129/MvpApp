@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 /**
  * @author ydong
+ * 暂时没用到
  */
 public class WakeUpHelper {
     private static final String TAG = WakeUpHelper.class.getSimpleName();

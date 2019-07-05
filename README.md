@@ -20,7 +20,6 @@
 </br>12、[微信接口的研究](https://github.com/changtuiqie)
 </br>13、[京东到家基于netty与websocket的实践](https://weixin.sogou.com/)
 ***
-[Showdoc笔记整理](https://www.showdoc.cc/anzerComputer?page_id=1113515797108060)
 
 
 

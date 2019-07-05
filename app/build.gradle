@@ -96,6 +96,14 @@ android {
             versionName "1.0.1"
         }
 
+        SpeechiflylibDemo {
+            dimension "features"
+            applicationId "com.flavors.ifly"
+            manifestPlaceholders = ["Demo_DeviceVersion_Value": "${buildTime()}"]
+            versionCode 1
+            versionName "1.0.1"
+        }
+
     }
 
     //修改生成的apk名字
