@@ -48,11 +48,12 @@ class FlowableTest {
 
             @Override
             public void onError(Throwable t) {
-
+                System.out.println("onError()");
             }
 
             @Override
             public void onComplete() {
+                System.out.println("onComplete()");
 
             }
         });
