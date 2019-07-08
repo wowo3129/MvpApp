@@ -1,9 +1,9 @@
 ext {
     android = [
-            compileSdkVersion: 27,
-            buildToolsVersion: "27.0.3",
-            minSdkVersion    : 21,
-            targetSdkVersion : 21,
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.3",
+            minSdkVersion    : 28,
+            targetSdkVersion : 28,
             versionCode      : 201810250,
             // 2.1.0更新日期：2018年9月12日，例子：服务版本名称：RS_2.1.0_2018.09.12_*，*表示渠道名称如光明图书馆
             // RS表示服务机器人，RP表示巡逻机器人
@@ -13,5 +13,4 @@ ext {
 
     ]
 
-    supportLibraryVersion = '27.1.1'
 }

@@ -30,8 +30,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.StatFs;
-import android.support.annotation.NonNull;
-import android.support.v4.util.LruCache;
+import androidx.annotation.NonNull;
+import androidx.core.util.LruCache;
 import android.util.Log;
 import android.widget.ImageView;
 
