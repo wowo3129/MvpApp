@@ -19,7 +19,7 @@
 </br>11、[websocket](https://www.jianshu.com/p/e294e6baa158)
 </br>12、[微信接口的研究](https://github.com/changtuiqie)
 </br>13、[京东到家基于netty与websocket的实践](https://weixin.sogou.com/)
-</br>14、[进程间通信方式案例](https://github.com/leavesC/IPCSamples)
+</br>14、[进程间通信方式案例](https://github.com/leavesC/IPCSamples) 、 [自定义View案例](https://github.com/leavesC/CustomView)
 ***
 
 
