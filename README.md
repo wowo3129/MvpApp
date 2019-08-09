@@ -20,6 +20,7 @@
 </br>12、[微信接口的研究](https://github.com/changtuiqie)
 </br>13、[京东到家基于netty与websocket的实践](https://weixin.sogou.com/)
 </br>14、[进程间通信方式案例](https://github.com/leavesC/IPCSamples) 、 [自定义View案例](https://github.com/leavesC/CustomView)
+</br>15、[了解Android系统架构引导体系](https://www.jianshu.com/p/b5b1b8e1747f) 、[Android系统架构开篇gityuan](http://gityuan.com/)
 ***
 
 
