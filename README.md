@@ -21,7 +21,7 @@
 </br>13、[京东到家基于netty与websocket的实践](https://weixin.sogou.com/)
 </br>14、[进程间通信方式案例](https://github.com/leavesC/IPCSamples) 、 [自定义View案例](https://github.com/leavesC/CustomView)
 </br>15、[了解Android系统架构引导体系](https://www.jianshu.com/p/b5b1b8e1747f) 、[Android系统架构开篇gityuan](http://gityuan.com/)
-</br>16、[git 切换分支 + 提交 + 更新 +查看历史 + 提交 + 推送](https://blog.csdn.net/weixin_41883384/article/details/80805580)
+</br>16、[git 切换分支 + 提交 + 更新 +查看历史 + 提交 + 推送](https://blog.csdn.net/weixin_41883384/article/details/80805580)、[Android 换肤框架](https://github.com/ximsfei/Android-skin-support)、[Fragment多级嵌套插件](https://github.com/YoKeyword/Fragmentation/blob/master/README_CN.md)
 ***
 
 
